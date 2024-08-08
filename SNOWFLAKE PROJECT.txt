@@ -1,0 +1,34 @@
+SNOWFLAKE PROJECT
+Create Roles :
+create ROLE Project_task_Admin;
+create ROLE Project_task_developer;
+create ROLE Project_task_Analyst;
+
+create user Ravi password='Snowpw1287';
+create user Raju password='Snowpw2812';
+create user Swati password='Snowpw8712';
+
+Grant Role Project_task_Admin to user Ravi;
+Grant Role Project_task_developer to user Raju;
+
+create or replace WAREHOUSE Project_task_wh
+with
+WAREHOUSE_SIZE = XSMALL
+AUTO_SUSPEND = 300
+AUTO_RESUME = TRUE
+COMMENT = 'This is the Project task warehouse';
+
+create or replace database project_task_db;
+create or Replace schema project_task_schema;
+
+
+Grant usage on WAREHOUSE Project_task_wh to ROLE Project_task_Admin;
+Grant usage on WAREHOUSE Project_task_wh to Role Project_task_developer;
+
+
+Snowflake and Git integration setup public.
+1.We need to signup github account and create a public repository.
+CREATE OR REPLACE API INTEGRATION git_SNOWTASK_integration
+ API_PROVIDER = git_https_api
+ API_ALLOWED_PREFIXES = ('https://github.com/SNOWFtask')
+ ENABLED = TRUE;
